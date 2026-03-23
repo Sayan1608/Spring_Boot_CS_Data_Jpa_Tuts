@@ -1,6 +1,7 @@
 package com.cs.springdatajpatutorial.entities;
 
 import jakarta.persistence.*;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -15,6 +16,11 @@ uniqueConstraints = {
 indexes = {
         @Index(name = "idx_sku", columnList = "sku"),
 })
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@Builder
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,9 +34,24 @@ public class Product {
 
     private BigDecimal price;
 
+    private Integer quantity;
+
     @CreationTimestamp
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
     private  LocalDateTime updatedAt;
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", sku='" + sku + '\'' +
+                ", title='" + title + '\'' +
+                ", price=" + price +
+                ", quantity=" + quantity +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                '}';
+    }
 }
