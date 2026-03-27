@@ -2,6 +2,7 @@ package com.cs.springdatajpatutorial.controllers;
 
 import com.cs.springdatajpatutorial.entities.Product;
 import com.cs.springdatajpatutorial.repository.ProductRepository;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,7 +18,10 @@ public class ProductController {
     }
 
     @GetMapping(path = "/products")
-    public List<Product> findByOrderByPriceDesc(){
-        return productRepository.findByOrderByPriceDesc();
+    public List<Product> findBy(@RequestParam(name = "sortBy", required = false, defaultValue = "price")
+                                                    String sortBy){
+//        return productRepository.findBy(Sort.by(Sort.Direction.DESC,sortBy));
+        return productRepository.findBy(Sort.by(Sort.Direction.DESC,sortBy,"title","quantity"));
+//        return productRepository.findBy(Sort.by(sortBy).ascending());
     }
 }
