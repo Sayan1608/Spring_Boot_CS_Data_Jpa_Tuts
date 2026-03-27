@@ -10,6 +10,8 @@ import java.util.List;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
+    List<Product> findByOrderByPriceDesc();
+
     List<Product> findByTitle(String s);
 
     List<Product> findBySkuContainingAndPriceBetween(String sku, BigDecimal startingPrice, BigDecimal endingPrice);
